@@ -1,17 +1,30 @@
 # gestor_tareas_local
 
-A new Flutter project.
+Aplicación Flutter multiplataforma para la gestión local de tareas.
 
-## Getting Started
+## Tecnología de persistencia elegida
 
-This project is a starting point for a Flutter application.
+Se eligió **Drift** porque permite describir el esquema de la base de datos con
+tipos Dart, generar código y trabajar con SQLite con seguridad de tipos. **Drift
+Flutter** integra la apertura de la base de datos con Flutter y gestiona su
+almacenamiento en las plataformas compatibles, incluida web; por eso no hace
+falta añadir `path_provider` directamente.
 
-A few resources to get you started if this is your first Flutter project:
+La tabla `Tareas` tiene este esquema:
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+| Columna | Tipo y restricciones |
+| --- | --- |
+| `id` | Entero, llave primaria autoincremental |
+| `titulo` | Texto de 1 a 200 caracteres |
+| `completada` | Booleano, valor predeterminado `false` |
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Cada registro se identifica de forma única mediante `id`, asignado
+automáticamente al insertar una tarea. El título no se usa como identificador,
+por lo que puede repetirse.
+
+La base se abre con el nombre `gestor_tareas` y el esquema está en la versión 1.
+El código generado se actualiza con:
+
+```shell
+dart run build_runner build --delete-conflicting-outputs
+```
