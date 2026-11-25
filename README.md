@@ -33,7 +33,9 @@ dart run build_runner build --delete-conflicting-outputs
 
 La aplicación crea una instancia de `AppDatabase` al iniciar y la inyecta en
 `TareasPage`. La pantalla guarda títulos con `insertarTarea` y observa la lista
-reactivamente mediante `observarTareas`.
+reactivamente mediante `observarTareas`. También permite editar el título,
+cambiar el estado y eliminar registros; los títulos se validan y recortan antes
+de guardarse.
 
 Para comprobar la persistencia, ejecuta la app, agrega una tarea, ciérrala por
 completo y vuelve a abrirla. La tarea debe seguir apareciendo; una recarga en
