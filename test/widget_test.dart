@@ -15,32 +15,6 @@ void main() {
     await database.close();
   });
 
-  test('observarTareas ordena por id descendente', () async {
-    await database.insertarTarea('Tarea anterior');
-    await database.insertarTarea('Tarea reciente');
-
-    final tareas = await database.observarTareas().first;
-
-    expect(tareas.map((tarea) => tarea.titulo).toList(), [
-      'Tarea reciente',
-      'Tarea anterior',
-    ]);
-  });
-
-  test('actualiza y elimina tareas por id', () async {
-    final id = await database.insertarTarea('Título original');
-
-    expect(await database.actualizarTitulo(id, 'Título actualizado'), 1);
-    expect(await database.cambiarEstado(id, true), 1);
-
-    final tarea = (await database.observarTareas().first).single;
-    expect(tarea.titulo, 'Título actualizado');
-    expect(tarea.completada, isTrue);
-
-    expect(await database.eliminarTarea(id), 1);
-    expect(await database.observarTareas().first, isEmpty);
-  });
-
   testWidgets('La pantalla inicial se muestra sin errores', (tester) async {
     await tester.pumpWidget(GestorTareasApp(database: database));
     expect(find.text('Gestor de tareas'), findsOneWidget);

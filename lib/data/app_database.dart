@@ -16,7 +16,16 @@ class Tareas extends Table {
 
 @DriftDatabase(tables: [Tareas])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(driftDatabase(name: 'gestor_tareas'));
+  AppDatabase()
+    : super(
+        driftDatabase(
+          name: 'gestor_tareas',
+          web: DriftWebOptions(
+            sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+            driftWorker: Uri.parse('drift_worker.js'),
+          ),
+        ),
+      );
 
   AppDatabase.forTesting(super.executor);
 
