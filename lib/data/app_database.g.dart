@@ -3,7 +3,7 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $TareasTable extends Tareas with TableInfo<$TareasTable, Tarea> {
+class $TareasTable extends Tareas with TableInfo<$TareasTable, TareaDb> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -58,7 +58,7 @@ class $TareasTable extends Tareas with TableInfo<$TareasTable, Tarea> {
   static const String $name = 'tareas';
   @override
   VerificationContext validateIntegrity(
-    Insertable<Tarea> instance, {
+    Insertable<TareaDb> instance, {
     bool isInserting = false,
   }) {
     final context = VerificationContext();
@@ -86,9 +86,9 @@ class $TareasTable extends Tareas with TableInfo<$TareasTable, Tarea> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Tarea map(Map<String, dynamic> data, {String? tablePrefix}) {
+  TareaDb map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Tarea(
+    return TareaDb(
       id: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}id'],
@@ -110,11 +110,11 @@ class $TareasTable extends Tareas with TableInfo<$TareasTable, Tarea> {
   }
 }
 
-class Tarea extends DataClass implements Insertable<Tarea> {
+class TareaDb extends DataClass implements Insertable<TareaDb> {
   final int id;
   final String titulo;
   final bool completada;
-  const Tarea({
+  const TareaDb({
     required this.id,
     required this.titulo,
     required this.completada,
@@ -136,12 +136,12 @@ class Tarea extends DataClass implements Insertable<Tarea> {
     );
   }
 
-  factory Tarea.fromJson(
+  factory TareaDb.fromJson(
     Map<String, dynamic> json, {
     ValueSerializer? serializer,
   }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Tarea(
+    return TareaDb(
       id: serializer.fromJson<int>(json['id']),
       titulo: serializer.fromJson<String>(json['titulo']),
       completada: serializer.fromJson<bool>(json['completada']),
@@ -157,13 +157,13 @@ class Tarea extends DataClass implements Insertable<Tarea> {
     };
   }
 
-  Tarea copyWith({int? id, String? titulo, bool? completada}) => Tarea(
+  TareaDb copyWith({int? id, String? titulo, bool? completada}) => TareaDb(
     id: id ?? this.id,
     titulo: titulo ?? this.titulo,
     completada: completada ?? this.completada,
   );
-  Tarea copyWithCompanion(TareasCompanion data) {
-    return Tarea(
+  TareaDb copyWithCompanion(TareasCompanion data) {
+    return TareaDb(
       id: data.id.present ? data.id.value : this.id,
       titulo: data.titulo.present ? data.titulo.value : this.titulo,
       completada: data.completada.present
@@ -174,7 +174,7 @@ class Tarea extends DataClass implements Insertable<Tarea> {
 
   @override
   String toString() {
-    return (StringBuffer('Tarea(')
+    return (StringBuffer('TareaDb(')
           ..write('id: $id, ')
           ..write('titulo: $titulo, ')
           ..write('completada: $completada')
@@ -187,13 +187,13 @@ class Tarea extends DataClass implements Insertable<Tarea> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Tarea &&
+      (other is TareaDb &&
           other.id == this.id &&
           other.titulo == this.titulo &&
           other.completada == this.completada);
 }
 
-class TareasCompanion extends UpdateCompanion<Tarea> {
+class TareasCompanion extends UpdateCompanion<TareaDb> {
   final Value<int> id;
   final Value<String> titulo;
   final Value<bool> completada;
@@ -207,7 +207,7 @@ class TareasCompanion extends UpdateCompanion<Tarea> {
     required String titulo,
     this.completada = const Value.absent(),
   }) : titulo = Value(titulo);
-  static Insertable<Tarea> custom({
+  static Insertable<TareaDb> custom({
     Expression<int>? id,
     Expression<String>? titulo,
     Expression<bool>? completada,
@@ -355,14 +355,14 @@ class $$TareasTableTableManager
         RootTableManager<
           _$AppDatabase,
           $TareasTable,
-          Tarea,
+          TareaDb,
           $$TareasTableFilterComposer,
           $$TareasTableOrderingComposer,
           $$TareasTableAnnotationComposer,
           $$TareasTableCreateCompanionBuilder,
           $$TareasTableUpdateCompanionBuilder,
-          (Tarea, BaseReferences<_$AppDatabase, $TareasTable, Tarea>),
-          Tarea,
+          (TareaDb, BaseReferences<_$AppDatabase, $TareasTable, TareaDb>),
+          TareaDb,
           PrefetchHooks Function()
         > {
   $$TareasTableTableManager(_$AppDatabase db, $TareasTable table)
@@ -394,8 +394,8 @@ class $$TareasTableTableManager
           withReferenceMapper: (p0) => p0
               .map(
                 (e) => (
-                  e.readTable<$TareasTable, Tarea>(table),
-                  BaseReferences<_$AppDatabase, $TareasTable, Tarea>(
+                  e.readTable<$TareasTable, TareaDb>(table),
+                  BaseReferences<_$AppDatabase, $TareasTable, TareaDb>(
                     db,
                     table,
                     e,
@@ -412,14 +412,14 @@ typedef $$TareasTableProcessedTableManager =
     ProcessedTableManager<
       _$AppDatabase,
       $TareasTable,
-      Tarea,
+      TareaDb,
       $$TareasTableFilterComposer,
       $$TareasTableOrderingComposer,
       $$TareasTableAnnotationComposer,
       $$TareasTableCreateCompanionBuilder,
       $$TareasTableUpdateCompanionBuilder,
-      (Tarea, BaseReferences<_$AppDatabase, $TareasTable, Tarea>),
-      Tarea,
+      (TareaDb, BaseReferences<_$AppDatabase, $TareasTable, TareaDb>),
+      TareaDb,
       PrefetchHooks Function()
     >;
 

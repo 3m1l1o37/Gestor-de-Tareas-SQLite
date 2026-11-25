@@ -28,3 +28,13 @@ El código generado se actualiza con:
 ```shell
 dart run build_runner build --delete-conflicting-outputs
 ```
+
+## Crear y consultar tareas
+
+La aplicación crea una instancia de `AppDatabase` al iniciar y la inyecta en
+`TareasPage`. La pantalla guarda títulos con `insertarTarea` y observa la lista
+reactivamente mediante `observarTareas`.
+
+Para comprobar la persistencia, ejecuta la app, agrega una tarea, ciérrala por
+completo y vuelve a abrirla. La tarea debe seguir apareciendo; una recarga en
+caliente no equivale a cerrar y reiniciar la aplicación.

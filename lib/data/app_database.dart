@@ -1,8 +1,11 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
+import '../models/tarea.dart' as app_model;
+
 part 'app_database.g.dart';
 
+@DataClassName('TareaDb')
 class Tareas extends Table {
   IntColumn get id => integer().autoIncrement()();
 
@@ -15,6 +18,29 @@ class Tareas extends Table {
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(driftDatabase(name: 'gestor_tareas'));
 
+  AppDatabase.forTesting(super.executor);
+
   @override
   int get schemaVersion => 1;
+
+  Future<int> insertarTarea(String titulo) {
+    return into(tareas).insert(TareasCompanion.insert(titulo: titulo));
+  }
+
+  Stream<List<app_model.Tarea>> observarTareas() {
+    final consulta = select(tareas)
+      ..orderBy([(tarea) => OrderingTerm.desc(tarea.id)]);
+
+    return consulta.watch().map(
+      (tareas) => tareas
+          .map(
+            (tarea) => app_model.Tarea(
+              id: tarea.id,
+              titulo: tarea.titulo,
+              completada: tarea.completada,
+            ),
+          )
+          .toList(),
+    );
+  }
 }
