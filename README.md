@@ -87,12 +87,12 @@ Marca una sola columna por plataforma después de probarla:
 
 | Plataforma | Verificada | Solo prevista |
 | --- | --- | --- |
-| Android | [ ] | [ ] |
+| Android | [ ] | [ 1] |
 | iOS | [ ] | [ ] |
-| Windows | [ ] | [ ] |
+| Windows | [ 1] | [ ] |
 | Linux | [ ] | [ ] |
 | macOS | [ ] | [ ] |
-| Web | [ ] | [ ] |
+| Web | [ ] | [ 1] |
 
 ## Cobertura de pruebas
 
